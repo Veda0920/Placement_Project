@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Placement Drives</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .drive-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .drive-card:hover {
+            transform: translateY(-5px);
+        }
+        .drive-card strong {
+            color: #007bff;
+        }
+        .apply-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .apply-btn:hover {
+            background-color: #218838;
+        }
+        .no-drives {
+            text-align: center;
+            color: #666;
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .success-message {
+            color: green;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upcoming Placement Drives</h1>
+
+        <!-- Display Placement Drives -->
+        {% if drives %}
+            {% for drive in drives %}
+                <div class="drive-card">
+                    <p><strong>Company:</strong> {{ drive.company_name }}</p>
+                    <p><strong>Date:</strong> {{ drive.date.strftime('%Y-%m-%d %H:%M') }}</p>
+                    <p><strong>Location:</strong> {{ drive.location }}</p>
+                    <p><strong>Description:</strong> {{ drive.description }}</p>
+                    <p><strong>Job Role:</strong> {{ drive.JobRole }}</p>
+                    <p><strong>Requirements:</strong> {{ drive.requirements or 'Not specified' }}</p>
+                    <form action="{{ url_for('apply', drive_id=drive.id) }}" method="GET">
+                        <button type="submit" class="apply-btn">Apply Now</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-drives">No upcoming placement drives available.</p>
+        {% endif %}
+    </div>
+    <div class="message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{% if category == 'success' %}success-message{% else %}error-message{% endif %}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

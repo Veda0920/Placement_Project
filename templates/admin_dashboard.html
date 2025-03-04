@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            background: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background: #007bff;
+            color: white;
+        }
+        main {
+            min-height: calc(100vh - 160px);
+            padding: 20px;
+        }
+        .dashboard-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        .dashboard-card h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .dashboard-card p {
+            color: #666;
+        }
+        .quick-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .quick-links a {
+            flex: 1 1 calc(33.33% - 20px);
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .quick-links a:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        footer {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/create_drive">Create Drive</a></li>
+            <li><a href="/view_applications">View Applications</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="quick-links">
+            <a href="/create_drive">
+                <h3>Create Placement Drive</h3>
+                <p>Set up new placement opportunities for students.</p>
+            </a>
+            <a href="/view_applications">
+                <h3>View Applications</h3>
+                <p>Review all submitted applications from users.</p>
+            </a>
+            <a href="/logout">
+                <h3>Logout</h3>
+                <p>Securely log out of the admin dashboard.</p>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Placement Societal Project</p>
+    </footer>
+</body>
+</html>

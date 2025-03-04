@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Placement Drive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .form-container label {
+            display: block;
+            margin-top: 10px;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+        .drives-list {
+            margin-top: 30px;
+        }
+        .drives-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .drives-list th, .drives-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .drives-list th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Placement Drive</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ 'success' if category == 'success' else 'error' }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <!-- Form to create a new placement drive -->
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('create_drive') }}">
+            <label for="company">Company Name:</label>
+            <input type="text" id="company" name="company" required>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+            <label for="JobRole">Job Role:</label>
+            <textarea id="JobRole" name="JobRole" rows="4" required></textarea>
+            <label for="requirements">Requirements (optional):</label>
+            <textarea id="requirements" name="requirements" rows="4"></textarea>
+            <button type="submit">Create Drive</button>
+        </form>
+    </div>
+
+    <!-- List of Placement Drives -->
+    <div class="drives-list">
+        <h2>Upcoming Placement Drives</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Job Role</th>
+                    <th>Requirements</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if drives_list %}
+                    {% for drive in drives_list %}
+                        <tr>
+                            <td>{{ drive.company_name }}</td>
+                            <td>{{ drive.date }}</td>
+                            <td>{{ drive.location }}</td>
+                            <td>{{ drive.description }}</td>
+                            <td>{{ drive.JobRole}}</td>                          
+                            <td>{{ drive.requirements or 'Not specified' }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">No placement drives available.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
